@@ -18,7 +18,47 @@
   ### Ping to the ```myservers``` group in your inventory
   ```
   ansible -i inventory.ini -m ping myservers
-  ``` 
+  ```
+  ### Use Metagroups
+  - Create a metagroup that organises the multiple groups in your inventory with the following syntax
+  ```yml
+  metagroupname:
+    children:
+  ```
+The following inventory illustrates a basic structure for a data centre. This example inventory contains a network metagroup that includes all network devices and a datacenter metagroup that includes the network group and all web servers.
+
+  ```yml
+  leafs:
+  hosts:
+    leaf01:
+      ansible_host: 192.0.2.100
+    leaf02:
+      ansible_host: 192.0.2.110
+
+  spines:
+  hosts:
+    spine01:
+      ansible_host: 192.0.2.120
+    spine02:
+      ansible_host: 192.0.2.130
+
+  network:
+  children:
+    leafs:
+    spines:
+
+  webservers:
+  hosts:
+    webserver01:
+      ansible_host: 192.0.2.140
+    webserver02:
+      ansible_host: 192.0.2.150
+
+  datacenter:
+  children:
+    network:
+    webservers:
+  ```
 
   ### Static Inventory
 
