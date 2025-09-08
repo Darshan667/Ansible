@@ -1,8 +1,24 @@
 # Inventory
-
+- Inventory: Organise the managed nodes in a centralised file that provides Ansible with system information and network location.
 - An Ansible inventory file is a fundamental component of Ansible that defines the hosts that you want to manage and the groups that the hosts belong to.
 
 - The inventory file can be static (a simple text file) or dynamic (the script generates it). It provides Ansible with the information about the remote notes communicated during operations.
+
+- create a file called inventory.ini in the /etc/ansible/
+- add a new group [myservers] to the inventory.ini file.
+- ```ini
+  [myservers]
+  10.135.32.51
+  10.135.32.52
+  ```
+  ### Verify your inventory
+  ```ad-hoc
+  ansible-inventory -i /etc/ansible/inventory.ini --list
+  ```
+  ### Ping to the ```myservers``` group in your inventory
+  ```
+  ansible -i inventory.ini -m ping myservers
+  ``` 
 
   ### Static Inventory
 
