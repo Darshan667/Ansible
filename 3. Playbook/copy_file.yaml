@@ -1,0 +1,11 @@
+---
+- name: copy file to remote
+  hosts: myserver
+  tasks:
+    - name: copy my first_playbook to /home/ubuntu
+      ansible.builtin.copy:
+        src: /etc/ansible/playbook/first_playbook.yaml
+        dest: /home/ubuntu
+        owner: ubuntu
+        group: ubuntu
+        mode: '775'
