@@ -20,8 +20,32 @@ Example:
       state: present
 ```
 
-### Task
-- A reference to a single module that defines the operation that Ansible performs.
+### 3. Modules
+- Modules are the building blocks of Ansible tasks.
+- They are small programs that perform a specific action on managed nodes, such as installing a package, copying a file, or managing the services.
+- Example:
+- The apt module is used to install the package
+```yaml
+- name: Install nginx
+  ansible.builtin.apt:
+   name: nginx
+   state: present
+```
 
-### Module
-- The unit of code that Ansible runs on managed nodes.
+### 4. Tasks
+- Tasks are individual actions within a play that use the modules to operate on managed nodes. Each task is executed in order and can include conditionals, loops, and handlers
+```
+tasks:
+ - name: Install nginx
+   ansible.builtin.apt:
+      name: nginx
+      state: present
+```
+
+### 5. Collections
+- Collections are a distribution format for Ansible content.
+- They bundle together multiple roles, modules, and other Ansible artefacts.
+```yaml
+- name: Install nginx
+  community.general.module:
+  option: value
